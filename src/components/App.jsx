@@ -32,7 +32,10 @@ export const App = () => {
     )
       alert(`${name} is already in contacts.`);
     else
-      setContacts([...contacts, { name: name, number: number, id: nanoid() }]);
+      setContacts(prev => [
+        ...prev,
+        { name: name, number: number, id: nanoid() },
+      ]);
     form.reset();
   };
 
@@ -44,7 +47,7 @@ export const App = () => {
     contacts.filter(contact => contact.name.toLowerCase().includes(filter));
 
   const handleDelete = name => {
-    setContacts(contacts.filter(contact => contact.name !== name));
+    setContacts(prev => prev.filter(contact => contact.name !== name));
   };
 
   return (
